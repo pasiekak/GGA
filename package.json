@@ -1,0 +1,30 @@
+{
+    "name": "gga",
+    "version": "1.0.0",
+    "description": "Grafika generowana algorytmicznie.",
+    "main": "index.html",
+    "author": {
+        "name": "Krzysztof Pasieka"
+    },
+    "scripts": {
+        "start": "parcel index.html --open",
+        "build": "parcel build index.html"
+    },
+    "dependencies": {
+        "@types/p5": "1.3.3",
+        "ml5": "^1.2.0",
+        "p5": "1.4.0",
+        "parcel-bundler": "^1.6.1"
+    },
+    "devDependencies": {
+        "typescript": "4.4.4"
+    },
+    "resolutions": {
+        "@babel/preset-env": "7.13.8"
+    },
+    "keywords": [
+        "p5js",
+        "typescript",
+        "gga"
+    ]
+}
