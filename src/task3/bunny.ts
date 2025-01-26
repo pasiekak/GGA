@@ -30,8 +30,8 @@ export class Bunny extends P5Class {
 
   huntedBy: Wolf | null = null;
 
-  hungryInterval: number;
-  ageInterval: number;
+  hungryInterval: NodeJS.Timeout;
+  ageInterval: NodeJS.Timeout;
 
   constructor(p5: P5, debug: boolean) {
     super(p5, debug);

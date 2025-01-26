@@ -14,7 +14,7 @@ export class Game extends P5Class {
   constructor(p5: P5, debug: boolean) {
     super(p5, debug);
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 10; i++) {
       const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
         16,
       )}`;
@@ -30,6 +30,10 @@ export class Game extends P5Class {
   }
 
   run() {
+    this.boards.forEach((board) => board.run());
+  }
+
+  draw() {
     this.boards.forEach((board) => board.draw());
   }
 

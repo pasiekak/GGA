@@ -1,4 +1,3 @@
-import p5 from 'p5';
 import P5 from 'p5';
 import { P5Class } from '../p5class';
 

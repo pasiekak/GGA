@@ -9,7 +9,7 @@ export class Food extends P5Class {
   value: number;
   size: number;
 
-  downsizeInterval: number;
+  downsizeInterval: NodeJS.Timeout;
 
   constructor(p5: P5, debug: boolean) {
     super(p5, debug);

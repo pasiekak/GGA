@@ -36,8 +36,8 @@ export class Racquet extends P5Class {
     this.brain =
       brain ||
       ml5.neuralNetwork({
-        inputs: 6,
-        outputs: ['LEFT', 'RIGHT'],
+        inputs: 2,
+        outputs: ['LEFT', 'STAY', 'RIGHT'],
         task: 'classification',
         neuroEvolution: true,
       });
@@ -65,26 +65,36 @@ export class Racquet extends P5Class {
   }
 
   think(ball: Ball) {
-    let inputs = [
-      ball.x / this.p5.width,
-      ball.y / this.p5.height,
-      ball.directionX === 'LEFT' ? -1 : 1,
-      ball.directionY === 'UP' ? -1 : 1,
-      this.x / this.p5.width,
-      this.height / this.p5.height,
-    ];
+    let inputs = [ball.x / this.p5.width, this.x / this.p5.width];
+
     const outputs = this.brain.classifySync(inputs);
+
+    const decisionHighestConfidence = outputs.reduce((acc, cum) =>
+      acc.confidence > cum.confidence ? acc : cum,
+    );
+
     this.move(
-      outputs[0].value > outputs[1].value ? outputs[0].label : outputs[1].label,
+      decisionHighestConfidence.label as 'LEFT' | 'RIGHT' | 'STAY',
+      ball,
     );
   }
 
-  move(direction: 'LEFT' | 'RIGHT') {
+  move(direction: 'LEFT' | 'RIGHT' | 'STAY', ball: Ball) {
     if (direction === 'LEFT') {
-      this.x -= 2;
+      this.x -= 1.5;
     } else {
-      this.x += 2;
+      this.x += 1.5;
     }
+
+    const ballMiddle = ball.x + ball.r / 2;
+
+    const racketLeft = this.x;
+    const racketRight = this.x + this.width;
+
+    if (ballMiddle >= racketLeft && ballMiddle <= racketRight) {
+      this.fitness += 1;
+    }
+
     this.x = this.p5.constrain(this.x, 0, this.p5.width - this.width);
   }
 }

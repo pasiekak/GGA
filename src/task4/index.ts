@@ -4,10 +4,12 @@ import { Game } from './game';
 export const runTask4 = (p5: P5) => {
   const BCK_COLOR = '#D2FDFF';
   let game: Game;
+  let timeSlider: P5.Element;
 
   p5.setup = () => {
-    p5.frameRate(120);
-    p5.createCanvas(p5.windowWidth, p5.windowHeight);
+    timeSlider = p5.createSlider(1, 20, 1);
+    timeSlider.position(p5.width - 100, p5.height - 20);
+    p5.createCanvas(p5.windowHeight, p5.windowHeight);
     p5.background(BCK_COLOR);
     game = new Game(p5, false);
   };
@@ -28,7 +30,10 @@ export const runTask4 = (p5: P5) => {
         : bestBottomFitness;
     }, 0);
     p5.text(`Highest fitness: ${highestFittness}`, p5.width - 200, 20);
-    game.run();
+    for (let i = 0; i < Number(timeSlider.value()); i++) {
+      game.run();
+    }
+    game.draw();
   };
 
   p5.windowResized = () => {

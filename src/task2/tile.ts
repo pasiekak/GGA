@@ -25,9 +25,9 @@ export class Tile extends P5Class {
   y: number;
   size: number;
 
-  ploughingTimeout: number | undefined;
-  overgrowingTimeout: number | undefined;
-  growingGrassTimeout: number | undefined;
+  ploughingTimeout: NodeJS.Timeout | undefined;
+  overgrowingTimeout: NodeJS.Timeout | undefined;
+  growingGrassTimeout: NodeJS.Timeout | undefined;
 
   constructor(p5: P5, debug: boolean, x: number, y: number, size: number) {
     super(p5, debug);

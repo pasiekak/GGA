@@ -34,7 +34,7 @@ export class Ecosystem extends P5Class {
 
   countTime: number = 0;
   generation: number = 1;
-  generationInterval: number;
+  generationInterval: NodeJS.Timeout;
 
   initAvgBunnyAge: number = 0;
   initAvgBunnyMaxSpeed: number = 0;

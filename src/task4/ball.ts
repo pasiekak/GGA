@@ -19,35 +19,31 @@ export class Ball extends P5Class {
     this.y = this.p5.height / 2;
     this.directionY = p5.random(['UP', 'DOWN']);
     this.directionX = p5.random(['LEFT', 'RIGHT']);
-    this.xOffset = p5.random(0, 0.5);
-    this.yOffset = p5.random(0, 0.5);
+    this.xOffset = this.p5.random(0, 0.95);
+    this.yOffset = 0.5;
     this.color = color;
   }
 
   move() {
     if (this.directionY === 'UP') {
-      this.y -= 0.5 + this.yOffset;
+      this.y -= this.yOffset;
     } else {
-      this.y += 0.5 + this.yOffset;
+      this.y += this.yOffset;
     }
     if (this.directionX === 'LEFT') {
-      this.x -= 0.5 + this.xOffset;
+      this.x -= this.xOffset;
     } else {
-      this.x += 0.5 + this.xOffset;
+      this.x += this.xOffset;
     }
   }
 
   bounce(bottomRacquet: Racquet, topRacquet: Racquet) {
     // bounce when hit left or right wall
-    if (this.directionX === 'LEFT' && this.x - this.r / 2 <= 0) {
+    if (this.x - this.r / 2 <= 0) {
       this.directionX = 'RIGHT';
-      this.xOffset = this.p5.random(0, 0.5);
-      this.yOffset = this.p5.random(0, 0.5);
     }
-    if (this.directionX === 'RIGHT' && this.x + this.r / 2 >= this.p5.width) {
+    if (this.x + this.r / 2 >= this.p5.width) {
       this.directionX = 'LEFT';
-      this.xOffset = this.p5.random(0, 0.5);
-      this.yOffset = this.p5.random(0, 0.5);
     }
 
     const topBounds = this.getRectBounds(topRacquet);
@@ -66,10 +62,9 @@ export class Ball extends P5Class {
       ballBounds.left <= topBounds.right &&
       this.directionY === 'UP'
     ) {
-      this.xOffset = this.p5.random(0, 0.5);
-      this.yOffset = this.p5.random(0, 0.5);
+      this.xOffset = this.p5.random(0, 0.95);
       console.log('Hit top racquet');
-      topRacquet.fitness += 1;
+      topRacquet.fitness += 500;
       this.directionY = 'DOWN';
       this.directionX = this.p5.random(['LEFT', 'RIGHT']);
     }
@@ -82,10 +77,9 @@ export class Ball extends P5Class {
       ballBounds.left <= bottomBounds.right &&
       this.directionY === 'DOWN'
     ) {
-      this.xOffset = this.p5.random(0, 0.5);
-      this.yOffset = this.p5.random(0, 0.5);
+      this.xOffset = this.p5.random(0, 0.95);
       console.log('Hit bottom racquet');
-      bottomRacquet.fitness += 1;
+      bottomRacquet.fitness += 500;
       this.directionY = 'UP';
       this.directionX = this.p5.random(['LEFT', 'RIGHT']);
     }

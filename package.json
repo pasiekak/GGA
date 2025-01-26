@@ -2,21 +2,24 @@
     "name": "gga",
     "version": "1.0.0",
     "description": "Grafika generowana algorytmicznie.",
-    "main": "index.html",
     "author": {
         "name": "Krzysztof Pasieka"
     },
+    "source": "index.html",
     "scripts": {
-        "start": "parcel index.html --open",
-        "build": "parcel build index.html"
+        "start": "parcel",
+        "build": "parcel build",
+        "buildp": "parcel build index.html --public-url ./"
     },
     "dependencies": {
         "@types/p5": "1.3.3",
         "ml5": "^1.2.0",
-        "p5": "1.4.0",
-        "parcel-bundler": "^1.6.1"
+        "p5": "1.4.0"
     },
     "devDependencies": {
+        "buffer": "^6.0.3",
+        "parcel": "latest",
+        "process": "^0.11.10",
         "typescript": "4.4.4"
     },
     "resolutions": {

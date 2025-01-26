@@ -33,19 +33,24 @@ export class Board extends P5Class {
     this.ball = new Ball(p5, debug, color);
   }
 
-  draw() {
+  run() {
     if (this.ball) {
       this.bottomRacquet.run(this.ball);
       this.topRacquet.run(this.ball);
 
       this.ball.move();
       this.ball.bounce(this.bottomRacquet, this.topRacquet);
-      this.ball.draw();
 
       if (this.ball.isOut()) {
         this.gameNumber += 1;
         this.ball = undefined;
       }
+    }
+  }
+
+  draw() {
+    if (this.ball) {
+      this.ball.draw();
     }
 
     this.bottomRacquet.draw(this.ball);
